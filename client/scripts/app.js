@@ -18,7 +18,7 @@ var App = {
   },
 
   fetch: function(callback = ()=>{}) {
-    App.allTheData = Parse.readAll((data) => {
+    Parse.readAll((data) => {
       // examine the response from the server request:
       console.log(data);
 

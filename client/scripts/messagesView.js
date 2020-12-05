@@ -17,9 +17,14 @@ var MessagesView = {
 
   //
   render: function() {
+    //check roomname and filter --> class
+    //check friends and format
+
+    setTimeout(MessagesView.initialize, 10000);
   }
 
 };
+// MessagesView.render();
 
 // var msg = new messages ('Thomas', 'hi there', 'main');
 // $(() => App.initialize());
