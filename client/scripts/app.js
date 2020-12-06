@@ -3,10 +3,10 @@ var App = {
   $spinner: $('.spinner img'),
 
   username: 'anonymous',
+  currentRoom: 'general',
 
   initialize: function() {
     App.username = window.location.search.substr(10);
-
     FormView.initialize();
     RoomsView.initialize();
     MessagesView.initialize();
