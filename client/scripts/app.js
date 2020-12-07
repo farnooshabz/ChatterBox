@@ -5,6 +5,7 @@ var App = {
   username: 'anonymous',
   currentRoom: 'general',
 
+
   initialize: function() {
     App.username = window.location.search.substr(10);
     FormView.initialize();
@@ -20,7 +21,8 @@ var App = {
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
-      console.log(data);
+      Rooms.update(data.result, RoomsView.render);
+      Messages.update(data.result, MessagesView.render);
 
       callback();
     });

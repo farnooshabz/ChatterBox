@@ -6,26 +6,26 @@ var RoomsView = {
 
   initialize: function() {
     //set up click functionality:
-    this.$button.on('click', function() {
+    RoomsView.$button.on('click', function() {
       let newRoom = prompt('Your cool room name here:');
-      Rooms.storage.push(newRoom);
+      Rooms.storage.push(newRoom); //now it is a set
       RoomsView.render();
     });
     //call render
     RoomsView.render();
 
     //update current room prop when selecting room
-    this.$select.on('change', function() {
+    RoomsView.$select.on('change', function() {
       //
       App.currentRoom = $('option:selected').val();
       MessagesView.render();
     })
   },
   render: function() {
-    this.$select.html('');
+    RoomsView.$select.html('');
     for (let i = 0; i < Rooms.storage.length; i++) {
       let curRoom = Rooms.storage[i];
-      this.$select.append(
+      RoomsView.$select.append(
         $('<option></option>').val(curRoom).html(curRoom)
       );
     }

@@ -7,13 +7,17 @@ var MessageView = {
   </div>
 
   `),
-  //displayNewMessage(object) {
-  display: function (obj) {
-  //1 render(object)
-    var rendered = '';
-    rendered += MessageView.render(obj);
-    //2 append
-    $('#chats').append(rendered);
 
-  }
+
+
 };
+
+
+
+// //displayNewMessage(object) {
+// display: function (obj) {
+// //1 render(object)
+//   var rendered = '';
+//   rendered += MessageView.render(obj);
+//   //2 append
+//   $('#chats').append(rendered);
