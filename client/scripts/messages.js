@@ -1,20 +1,21 @@
 var Messages = {
-  _data: {},
+  storage: {},
   items: function() {
-    return Messages._data._chain();
+    return Object.values(Messages.storage);
   },
   add: function(message, cb) {
-    Messages._data[message.objectId] = Messages.conform(message);
-    cb();
+    message = Messages.conform(message);
+    Messages.storage[message.objectId] = message;
+    cb(Messages.items());
 
   },
   update: function(messages, callback) {
     for ( var message of messages) {
-      Messages._data[message.objectId] = Messages.conform(message);
+      Messages.add(message);
     }
-    callback();
+    callback(Messages.items());
   },
-  _conform: function(message) {
+  conform: function(message) {
     //ensure each message object conforms to expected shape
     message.text = message.text || '';
     message.username = message.username || '';

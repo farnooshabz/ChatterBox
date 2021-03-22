@@ -1,15 +1,23 @@
 var Rooms = {
-  //_data = list of strings => keep adding and adding and ignore if it is already there ---> to iterate _data (for of // for in // .values )
-  _data: new set,
+  storage: new Set(),
   selected: 'lobby',
-  isSelected: function(roomname) {
-    return roomname === Rooms.selected ||
-           !roomname && Rooms.selected === 'lobby';
+
+  //list of rooms for roomsview
+  items: () => {
+    return [...Rooms.storage];
   },
-  update: function (messages) {
-    _.chain(messages)
-      .pluck('roomname')
-      .uniq()
-      .each(room => Rooms._data.add(room));
+  isSelected: function(roomname = 'lobby') {
+    return roomname === Rooms.selected;
+  },
+  add: function (roomname, callback = () => {}) {
+    Rooms.storage.add(roomname);
+    Rooms.selected = roomname;
+    callback(Rooms.items);
+  },
+  update: function(messages, callback = () => {}) {
+    messages.forEach(message => {
+      Rooms.add(message.roomname);
+    });
+    callback(Rooms.items());
   }
 };

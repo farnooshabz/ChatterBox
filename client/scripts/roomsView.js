@@ -2,32 +2,34 @@ var RoomsView = {
 
   $button: $('#rooms button'),
   $select: $('#rooms select'),
-  $option: $('#rooms option'),
 
   initialize: function() {
-    //set up click functionality:
-    RoomsView.$button.on('click', function() {
-      let newRoom = prompt('Your cool room name here:');
-      Rooms.storage.push(newRoom); //now it is a set
-      RoomsView.render();
-    });
-    //call render
-    RoomsView.render();
-
-    //update current room prop when selecting room
-    RoomsView.$select.on('change', function() {
-      //
-      App.currentRoom = $('option:selected').val();
-      MessagesView.render();
-    })
+    RoomsView.$select.on('change', RoomsView.handleChange);
+    RoomsView.$button.on('click', RoomsView.handleClick);
   },
   render: function() {
+    //get rid of all options render out all options and then selecting the selected one.
     RoomsView.$select.html('');
-    for (let i = 0; i < Rooms.storage.length; i++) {
-      let curRoom = Rooms.storage[i];
-      RoomsView.$select.append(
-        $('<option></option>').val(curRoom).html(curRoom)
-      );
+    Rooms.items().forEach(RoomsView.renderRoom);
+    RoomsView.$select.val(Rooms.selected);
+  },
+  renderRoom: function(roomname) {
+    var $option = $('<option>').val(roomname).text(roomname);
+    RoomsView.$select.append($option);
+  },
+  handleChange: function() {
+    //get the value that was selected
+    Rooms.selected = RoomsView.$select.val();
+    RoomsView.render();
+  },
+  handleClick: function() {
+    //allow user to enter a new roomname
+    var roomname = prompt('Enter you roomname');
+    if (roomname) {
+      Rooms.add(roomname, () => {
+        RoomsView.render();
+        MessagesView.render();
+      });
     }
   }
 };

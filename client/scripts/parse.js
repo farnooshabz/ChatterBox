@@ -14,7 +14,7 @@ var Parse = {
       },
       error: errorCB || function (error) {
         // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
-        console.error('chatterbox: Failed to send message', error);
+        console.error('chatterbox: Failed to post message', error);
       }
     });
   },

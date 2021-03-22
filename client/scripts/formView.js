@@ -7,22 +7,22 @@ var FormView = {
   },
 
   handleSubmit: function(event) {
-    // Stop the browser from submitting the form
+    //stop the browser to to it's default
     event.preventDefault();
-    var msg = {
-      roomname: Rooms.selected,
+
+    var message = {
       username: App.username,
+      roomname: Rooms.selected || 'lobby',
       text: FormView.$form.find('#message').val()
     };
-    Parse.create(msg, (data) => {
+
+    Parse.create(message, (data) => {
       //what extend does is to merge the remaining properties that we need with the ones that we created
-      //parse does not return entire object just the properties it created 
-      _.extend(msg, data);
-      Messages.add(msg, MessagesView.render);
+      //parse does not return entire object just the properties it created
+      _.extend(message, data);
+      Messages.add(message, MessagesView.render);
 
     });
-
-    console.log('clicked');
   },
 
   setStatus: function(active) {
