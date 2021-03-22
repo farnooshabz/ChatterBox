@@ -1,6 +1,5 @@
 var Friends = {
   storage: new Set(),
-
   items: function() {
     return [...Friends.storage];
   },

@@ -1,14 +1,10 @@
 var MessagesView = {
   $chats: $('#chats'),
   initialize: function() {
-
     //anything that should be done here when dom loads
     //username needed to specify only the clicks on divs with username class
     MessagesView.$chats.on('click', '.username', MessagesView.handleClick);
   },
-
-
-
   render: function(messages) {
     //render all the msges
     //to avoid duplicate messages let's clear the dom first
@@ -17,7 +13,6 @@ var MessagesView = {
       MessagesView.renderMessage(message);
     });
   },
-
   renderMessage: function(message) {
     //render a single msg
     //generate a new message dom element
@@ -37,5 +32,4 @@ var MessagesView = {
       Friends.toggleStatus(username, MessagesView.render);
     }
   }
-
 };
